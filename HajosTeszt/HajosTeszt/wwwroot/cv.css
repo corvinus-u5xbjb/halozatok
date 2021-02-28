@@ -1,0 +1,49 @@
+﻿div {
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid fuchsia;
+    border-radius: 25px;
+}
+
+h1,
+h2 {
+    text-align: center;
+}
+
+a {
+    padding: 10px;
+    border-radius: 25px;
+    background-color: blue;
+    color: white;
+}
+
+    a:hover {
+        /* vegyük észre, hogy örökli a tulajdonságokat a szülőtől, egyet közülük felülírunk*/
+        background-color: fuchsia;
+    }
+
+span {
+    font-weight: bold;
+    font-style: italic;
+    color: fuchsia;
+    font-size: 40px;
+}
+
+#listak {
+    background-color: lightgrey;
+}
+
+.megisfeher {
+    background-color: white;
+    width: 100px;
+    border-radius: 25px;
+}
+
+.sorrendi {
+    font-style: italic;
+}
+
+img {
+    display: block;
+    margin: auto;
+}
