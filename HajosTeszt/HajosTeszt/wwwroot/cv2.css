@@ -1,0 +1,81 @@
+﻿{
+    box-sizing: border-box;
+}
+
+body {
+    font-weight: bold;
+    text-align: center;
+}
+
+#header {
+    background-color: tomato;
+    padding: 20px;
+}
+
+#nav a {
+    flex: 1 1 auto;
+    text-decoration: none;
+    color: white;
+}
+
+#nav {
+    background: green;
+    padding: 20px;
+}
+
+#felsorolás {
+    text-align: left;
+    background: gold;
+    padding: 20px;
+    display: flex;
+}
+
+#történet {
+    text-align: left;
+    background-color: lightgreen;
+    padding: 20px;
+}
+
+#munkahely {
+    text-align: left;
+    background: hotpink;
+    padding: 20px;
+}
+
+@media screen and (min-width: 800px) {
+    body {
+        display: flex;
+        flex-direction: column;
+        max-width: 1500px;
+        margin: auto;
+    }
+
+    #school {
+        display: flex;
+    }
+
+    #nav,
+    #header {
+        order: -1;
+    }
+
+    #felsorolás {
+        flex: 1 1 75%;
+    }
+
+    #történet {
+        flex: 1 1 25%;
+    }
+}
+
+a {
+    padding: 3px;
+    border-radius: 25px;
+    background-color: tomato;
+    color: white;
+}
+
+img {
+    display: block;
+    margin: auto;
+}
