@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <script src="hetedik.js"></script>
 </head>
 <body>
     <div id="külső">
@@ -17,12 +18,12 @@
                 <div id="válasz3" class="kerdes kattintható rossz">Válasz 3</div>
             </div>
             <div id="kép">
-                <img id="kép1" src="https://szoft1.comeback.hu/hajo/teszt-0050.jpg" />
+                <img id="kép2" src="https://szoft1.comeback.hu/hajo/teszt-0050.jpg" />
             </div>
         </div>
         <div id="vezérlő">
-            <div class="gomb kattintható">Vissza</div>
-            <div class="gomb kattintható">Előre</div>
+            <div class="gomb kattintható" onclick="kattvissza()">Vissza</div>
+            <div class="gomb kattintható" onclick="kattelőre()">Előre</div>
         </div>
     </div>
     <style>
@@ -89,6 +90,6 @@
         .kattintható:hover {
             background-color: lightblue;
         }
-    </style>
+    </style>    
 </body>
 </html>
