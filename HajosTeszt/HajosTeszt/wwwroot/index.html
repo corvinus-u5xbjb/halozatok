@@ -2,10 +2,30 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
+    <link href="stilus.css" rel="stylesheet" />
+    <script src="tizedik.js"></script>
 </head>
 <body>
-    <p>Üdvözlet!</p>
-    <p>A hajó.html eléréshez kattints <a href="hajo.html">ide</a>!</p>
+    <div id="külső">
+        <div id="kérdés_szöveg">
+            Kérdés szövege
+        </div>
+        <div id="középső">
+            <div id="válaszok">
+                <div id="válasz1" onclick="választás(1)" class="kerdes kattintható">Válasz 1</div>
+                <div id="válasz2" onclick="választás(2)" class="kerdes kattintható jó">Válasz 2</div>
+                <div id="válasz3" onclick="választás(3)" class="kerdes kattintható rossz">Válasz 3</div>
+            </div>
+            <div id="kép_keret">
+                <img id="kép" src="" />
+            </div>
+        </div>
+        <div id="vezérlő">
+            <div id="vissza_gomb" class="gomb kattintható">Vissza</div>
+            <div id="előre_gomb" class="gomb kattintható">Előre</div>
+        </div>
+    </div>
 </body>
 </html>
