@@ -14,9 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     //kérdések száma
-    fetch("questions/count")
+    fetch("kerdesek/count")
         .then(result => result.text())
-        .then(n => { numberOfQuestions = parseInt() })
+        .then(n => { numberOfQuestions = parseInt(n) })
 
     //előre-hátra
     document.getElementById("előre_gomb").addEventListener("click", előre);
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     //kezdő kérdéslista
-    if (hotList.length === 0) {
+    if (!localStorage.getItem("hotList")) {
         for (let i = 0; i < questionsInHotList; i++) {
             kérdésBetöltés(nextQuestion, i)
             nextQuestion++;
@@ -46,25 +46,25 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function kérdésBetöltés(questionNumber, destination) {
-        fetch(`/questions/${questionNumber}`)
-            .then(result => {
-                if (!result.ok) {
-                    console.error(`Hibás letöltés: ${result.status}`);
-                    return null;
-                }
-                else {
-                    return result.json();
-                }
-            })
-            .then(q => {
-                hotList[destination].question = q;
-                hotList[destination].goodAnswers = 0;
-                console.log(`A ${questionNumber}. kérdés letöltsére került a hotList ${destination}. helyére`)
-                if (displayedQuestion === undefined && destination === 0) {
-                    displayedQuestion = 0;
-                    kérdésMegjelenítés();
-                }
-            })
+    fetch(`/kerdesek/${questionNumber}`)
+        .then(result => {
+            if (!result.ok) {
+                console.error(`Hibás letöltés: ${result.status}`);
+                return null;
+            }
+            else {
+                return result.json();
+            }
+        })
+        .then(q => {
+            hotList[destination].question = q;
+            hotList[destination].goodAnswers = 0;
+            console.log(`A ${questionNumber}. kérdés letöltsére került a hotList ${destination}. helyére`);
+            if (displayedQuestion === undefined && destination === 0) {
+                displayedQuestion = 0;
+                kérdésMegjelenítés();
+            }
+        })
 }
 
 function kérdésMegjelenítés() {
@@ -75,15 +75,16 @@ function kérdésMegjelenítés() {
         document.getElementById("válasz3").innerText = kérdés.answer3;
 
         if (kérdés.image) {
-            document.getElementById("kép").src = kérdés.image;
+            document.getElementById("kép").src = "https://szoft1.comeback.hu/hajo/" + kérdés.image;
             document.getElementById("kép").style.display = "block";
         }
         else {
             document.getElementById("kép").style.display = "none";
-    }
+        }
 
-    for (var i = 1; i < 3; i++) document.getElementByID("válasz" + i).classList.remove("jó", "rossz")
-    document.getElementById("válaszok").style.pointerEvents = "auto";
+        for (var i = 1; i < 3; i++) document.getElementById("válasz" + i).classList.remove("jó", "rossz");
+
+        document.getElementById("válaszok").style.pointerEvents = "auto";
 }
 
 function előre() {
@@ -102,7 +103,7 @@ function vissza() {
 function választás(n) {
     let kérdés = hotList[displayedQuestion].question;
     if (n === kérdés.correctAnswer) {
-        document.getElementByID("válasz" + n).classList.add("jó")
+        document.getElementById("válasz" + n).classList.add("jó");
         hotList[displayedQuestion].goodAnswers++;
         if (hotList[displayedQuestion].goodAnswers === 3) {
             kérdésBetöltés(nextQuestion, displayedQuestion);
@@ -111,8 +112,8 @@ function választás(n) {
         }
     }
     else {
-        document.getElementByID("válasz" + n).classList.add("rossz")
-        document.getElementByID("válasz" + kérdés.correctAnswer).classList.add("jó")
+        document.getElementById("válasz" + n).classList.add("rossz");
+        document.getElementById("válasz" + kérdés.correctAnswer).classList.add("jó");
         hotList[displayedQuestion].goodAnswers = 0;
     }
 
@@ -120,7 +121,7 @@ function választás(n) {
 
     timerHandler = setTimeout(előre, 3000);
 
-    localStorage.setItem("hotList", JSON.stringify(hotList))
-    localStorage.setItem("displayedQuestion", displayedQuestion)
-    localStorage.setItem("nextQuestion", nextQuestion)
+    localStorage.setItem("hotList", JSON.stringify(hotList));
+    localStorage.setItem("displayedQuestion", displayedQuestion);
+    localStorage.setItem("nextQuestion", nextQuestion);
 }
